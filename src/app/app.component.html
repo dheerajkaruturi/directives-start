@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-primary" (click)="toggleValue()">
+        Only show odd numbers
+      </button>
+      <br /><br />
+      <ul class="list-group">
+        <div *ngIf="onlyOdd">
+          <li
+            class="list-group-item"
+            [ngClass]="{ odd: odds % 2 !== 0 }"
+            [ngStyle]="{
+              backgroundColor: odds % 2 !== 0 ? 'black' : 'transperant'
+            }"
+            *ngFor="let odds of oddNumbers; let i = index"
+          >
+            {{ i + 1 }} - {{ odds }}
+          </li>
+        </div>
+        <!-- <div *ngIf="!onlyOdd">
+          <li
+            class="list-group-item"
+            [ngClass]="{ even: evens % 2 == 0 }"
+            *ngFor="let evens of evenNumbers; let i = index"
+          >
+            {{ i + 1 }} - {{ evens }}
+          </li>
+        </div> -->
+
+        <!-- ?using a custom structural directive -->
+        <div *appUnless="onlyOdd">
+          <li
+            class="list-group-item"
+            [ngClass]="{ even: evens % 2 == 0 }"
+            *ngFor="let evens of evenNumbers; let i = index"
+          >
+            {{ i + 1 }} - {{ evens }}
+          </li>
+        </div>
+      </ul>
+      <!-- <ng-template [ngIf]="onlyOdd">
+        <p>Only odd</p>
+      </ng-template> -->
+    </div>
+  </div>
+  <p appbasicHighlight>This styled by using basic directive</p>
+  <br />
+  <p appBetterHighlight [defaultColor]="'yellow'" [highlightColor]="'red'">
+    This styled by using better directive
+  </p>
+  <br />
+  <p appCustomDirective>This is a custom directive created</p>
+</div>
